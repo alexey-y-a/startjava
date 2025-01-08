@@ -8,20 +8,20 @@ public class VariableNamesTheme {
         System.out.println("Цифра = " + digit);
 
         // Сумма чисел
-        int sumOfTheNumbers = 7;
-        System.out.println("Сумма чисел = " + sumOfTheNumbers);
+        int numberSum = 7;
+        System.out.println("Сумма чисел = " + numberSum);
 
         // Произведение цифр
-        int productNumbers = 5 * 5;
-        System.out.println("Произведение цифр = " + productNumbers);
+        int numberProduct = 5 * 5;
+        System.out.println("Произведение цифр = " + numberProduct);
 
         // Максимальное число
         int maxNumber = 25;
         System.out.println("Максимальное число = " + maxNumber);
 
         // Количество десятков
-        int numberOfTens = 2;
-        System.out.println("Количество десятков = " + numberOfTens);
+        int tenCount = 2;
+        System.out.println("Количество десятков = " + tenCount);
 
         // Вес собаки
         int dogWeight = 11;
@@ -32,12 +32,12 @@ public class VariableNamesTheme {
         System.out.println("Исходное число = " + originalNumber);
 
         // Процент по вкладу
-        int percentOfTheDeposit = 23;
-        System.out.println("Процент по депозиту = " + percentOfTheDeposit);
+        int depositPercent = 23;
+        System.out.println("Процент по депозиту = " + depositPercent);
 
         // Переменная хранит символ &
-        char symbolStoresCharacter = '&';
-        System.out.println("Переменная хранит символ & = " + symbolStoresCharacter);
+        char symbol = '&';
+        System.out.println("Переменная хранит символ & = " + symbol);
 
         // Код ошибки
         int codeError = 404;
@@ -48,8 +48,8 @@ public class VariableNamesTheme {
         System.out.println("Тип сообщения = " + messageType);
 
         // Число нулей
-        int numberOfZeros = 3;
-        System.out.println("Число нулей = " + numberOfZeros);
+        int zeroCount = 3;
+        System.out.println("Число нулей = " + zeroCount);
 
         // Уникальное число
         int uniqueNumber = 10;
@@ -76,24 +76,24 @@ public class VariableNamesTheme {
         System.out.println("Пункт меню = " + menuItem);
 
         // Стоимость кофе
-        int costOfCoffee = 150;
-        System.out.println("Стоимость кофе = " + costOfCoffee);
+        int coffeePrice = 150;
+        System.out.println("Стоимость кофе = " + coffeePrice);
 
         // Начальная дата
         String startDate = "06.01.2025";
         System.out.println("Начальная дата = " + startDate);
 
         // Окончание диапазона
-        int endRange = 55;
-        System.out.println("Окончание диапазона = " + endRange);
+        int rangeEnd = 55;
+        System.out.println("Окончание диапазона = " + rangeEnd);
 
         // Имя работника месяца
-        String employeeOfTheMonthName = "Alexey";
-        System.out.println("Имя работника месяца = " + employeeOfTheMonthName);
+        String employeeOfMonthName = "Alexey";
+        System.out.println("Имя работника месяца = " + employeeOfMonthName);
 
         // Название электронной книги
-        String nameOfElectronicBook = "Джава эффективное программирование";
-        System.out.println("Название электронной книги = " + nameOfElectronicBook);
+        String electronicBookTitle = "Джава эффективное программирование";
+        System.out.println("Название электронной книги = " + electronicBookTitle);
 
         // Размер
         int size = 48;
@@ -108,12 +108,12 @@ public class VariableNamesTheme {
         System.out.println("Счетчик = " + counter);
 
         // Путь до файла
-        String pathToTheFile = "Desktop/java/StartJava";
-        System.out.println("Путь до файла = " + pathToTheFile);
+        String filePath = "Desktop/java/StartJava";
+        System.out.println("Путь до файла = " + filePath);
 
         // Количество чисел в каждой строке
-        int numberOfNumbersInEachLine = 28;
-        System.out.println("Количество чисел в каждой строке = " + numberOfNumbersInEachLine + "\n");
+        int numbersEachLine = 28;
+        System.out.println("Количество чисел в каждой строке = " + numbersEachLine + "\n");
 
         System.out.println("2. Boolean-переменные\n");
 
@@ -122,8 +122,8 @@ public class VariableNamesTheme {
         System.out.println("Сотни равны? " + isEqualHundreds);
 
         // Компьютер включен?
-        boolean isOnComputer = true;
-        System.out.println("Компьютер включен? " + isOnComputer);
+        boolean isComputerOn = true;
+        System.out.println("Компьютер включен? " + isComputerOn);
 
         // Есть равные цифры?
         boolean hasEqualDigits = false;
@@ -134,12 +134,12 @@ public class VariableNamesTheme {
         System.out.println("Создано? " + isCreated);
 
         // Пустое?
-        boolean empty = true;
-        System.out.println("Пустое? " + empty);
+        boolean isEmpty = true;
+        System.out.println("Пустое? " + isEmpty);
 
         // Активное?
-        boolean active = true;
-        System.out.println("Активное? " + active);
+        boolean isActive = true;
+        System.out.println("Активное? " + isActive);
 
         // Новое?
         boolean isNew = false;
@@ -156,8 +156,8 @@ public class VariableNamesTheme {
         System.out.println("3. Аббревиатуры\n");
 
         // Старый universally unique identifier
-        int uuid = 1234;
-        System.out.println("Старый universally unique identifier = " + uuid);
+        int oldUuid = 1234;
+        System.out.println("Старый universally unique identifier = " + oldUuid);
 
         // Производитель оперативной памяти
         String ramManufacturer = "Corsair";
@@ -172,8 +172,8 @@ public class VariableNamesTheme {
         System.out.println("Протокол передачи гипертекста = " + http);
 
         // Сокращенный uniform resource locator
-        String url = "https://example.com";
-        System.out.println("Сокращенный uniform resource locator = " + url);
+        String shortUrl = "https://example.com";
+        System.out.println("Сокращенный uniform resource locator = " + shortUrl);
 
         // Новый идентификатор клиента
         String newClientId = "CLIENT123";

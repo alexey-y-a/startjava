@@ -3,7 +3,7 @@ public class VariablesTheme {
     public static void main(String[] args) {
         System.out.println("1. Вывод характеристик компьютера\n");
         byte numberOfCores = 4;
-        short processorFrequency = 2200;
+        short cpu = 2200;
         int ramSize = 16;
         long storageSize = 500000000000L;
         float screenSize = 15.4f;
@@ -11,7 +11,7 @@ public class VariablesTheme {
         char processorBrand = 'I';
         boolean isLaptop = true;
         System.out.println("Количество ядер процессора: " + numberOfCores);
-        System.out.println("Частота процессора: " + processorFrequency + " МГц");
+        System.out.println("Частота процессора: " + cpu + " МГц");
         System.out.println("Объем оперативной памяти: " + ramSize + " Гб");
         System.out.println("Объем хранилища " + storageSize + "байт");
         System.out.println("Размер экрана: " + screenSize + " дюймов");
@@ -23,10 +23,12 @@ public class VariablesTheme {
         double penPrice = 105.5;
         double bookPrice = 235.83;
         double discount = 0.11;
-        System.out.printf("Стоимость товаров без скидки: %.2f руб.\n ", (penPrice + bookPrice));
-        System.out.printf("Сумма скидки: %.2f\n", (penPrice + bookPrice) * discount);
-        System.out.printf("Стоимость товаров со скидкой: %.2f руб.\n\n", ((penPrice + bookPrice) - 
-                ((penPrice + bookPrice) * discount)));
+        double totalPrice = penPrice + bookPrice;
+        double discountAmount = totalPrice * discount;
+        double finalPrice = totalPrice - discountAmount;
+        System.out.printf("Стоимость товаров без скидки: %.2f руб.\n ", totalPrice);
+        System.out.printf("Сумма скидки: %.2f\n", discountAmount);
+        System.out.printf("Стоимость товаров со скидкой: %.2f руб.\n\n", finalPrice);
 
         System.out.println("3. Вывод слова JAVA\n");
         System.out.println("    J    a  v     v  a");
@@ -63,8 +65,8 @@ public class VariablesTheme {
         System.out.println("5. Перестановка значений переменных\n");
         int num1 = 2;
         int num2 = 5;
-        System.out.println("Исходные значения переменных: num1 = " + num1 + ", num2 = " + 
-                num2 + "\n");
+        System.out.println("Исходные значения переменных: num1 = " + num1 + 
+                ", num2 = " + num2 + "\n");
 
         // С помощью третьей переменной
         System.out.println("С помощью третьей переменной");
@@ -82,22 +84,22 @@ public class VariablesTheme {
 
         // С помощью побитовой операции ^
         System.out.println("С помощью побитовой операции ^");
-        num1 = num1 ^ num2;
-        num2 = num1 ^ num2;
-        num1 = num1 ^ num2;
+        num1 ^= num2;
+        num2 ^= num1;
+        num1 ^= num2;
         System.out.println("Новые значения: num1 = " + num1 + ", num2 = " + num2 + "\n");
 
         System.out.println("6. Вывод символов и их кодов\n");
-        char char36 = '$';
-        char char42 = '*';
-        char char64 = '@';
-        char char124 = '|';
-        char char126 = '~';
-        System.out.println("Код символа: " + (int) char36 + " Символ: " + char36);
-        System.out.println("Код символа: " + (int) char42 + " Символ: " + char42);
-        System.out.println("Код символа: " + (int) char64 + " Символ: " + char64);
-        System.out.println("Код символа: " + (int) char124 + " Символ: " + char124);
-        System.out.println("Код символа: " + (int) char126 + " Символ: " + char126 + "\n");
+        char dollar = '$';
+        char asterisk = '*';
+        char atSign = '@';
+        char verticalBar = '|';
+        char tilde = '~';
+        System.out.println("Код символа: " + (int) dollar + " Символ: " + dollar);
+        System.out.println("Код символа: " + (int) asterisk + " Символ: " + asterisk);
+        System.out.println("Код символа: " + (int) atSign + " Символ: " + atSign);
+        System.out.println("Код символа: " + (int) verticalBar + " Символ: " + verticalBar);
+        System.out.println("Код символа: " + (int) tilde + " Символ: " + tilde + "\n");
 
         System.out.println("7. Вывод в консоль ASCII-арт Дюка\n");
         char slash = '/';
@@ -110,26 +112,26 @@ public class VariablesTheme {
         System.out.println("  " + slash + underscore + leftParenthesis + " " + 
                 rightParenthesis + backslash);
         System.out.println(" " + slash + "      " + backslash);
-        System.out.println(slash + "" + underscore + "" + underscore + "" + underscore + "" +
-                underscore + slash + backslash + underscore + "" + underscore + backslash + "\n");
+        System.out.println("" + slash + underscore + underscore + underscore + underscore +
+                slash + backslash + underscore + underscore + backslash + "\n");
 
         System.out.println("8. Манипуляции с сотнями, десятками и единицами числа\n");
         int number = 123;
         int hundreds = number / 100;
         int tens = (number % 100) / 10;
-        int units = number % 10;
+        int ones = number % 10;
         System.out.println("Число " + number + " содержит:");
         System.out.println("  сотен - " + hundreds);
         System.out.println("  десятков - " + tens);
-        System.out.println("  единиц - " + units);
-        System.out.println("Сумма разрядов = " + hundreds + tens + units);
-        System.out.println("Произведение разрядов = " + hundreds * tens + units + "\n");
+        System.out.println("  единиц - " + ones);
+        System.out.println("Сумма разрядов = " + hundreds + tens + ones);
+        System.out.println("Произведение разрядов = " + hundreds * tens + ones + "\n");
 
         System.out.println("9. Перевод секунд в часы, минуты и секунды\n");
         int totalSeconds = 86399;
-        int hours = totalSeconds / (60 * 60);
-        int minutes = (totalSeconds % (60 * 60)) / 60;
-        int seconds = totalSeconds % 60;
-        System.out.printf("%02d:%02d:%02d\n", hours, minutes, seconds);
+        int hh = totalSeconds / (60 * 60);
+        int mm = (totalSeconds % (60 * 60)) / 60;
+        int ss = totalSeconds % 60;
+        System.out.printf("%02d:%02d:%02d\n", hh, mm, ss);
     }
 }

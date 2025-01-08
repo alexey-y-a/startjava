@@ -40,8 +40,8 @@ public class VariableNamesTheme {
         System.out.println("Переменная хранит символ & = " + symbol);
 
         // Код ошибки
-        int codeError = 404;
-        System.out.println("Код ошибки = " + codeError);
+        int errorCode = 404;
+        System.out.println("Код ошибки = " + errorCode);
 
         // Тип сообщения
         String messageType = "Error";
@@ -92,8 +92,8 @@ public class VariableNamesTheme {
         System.out.println("Имя работника месяца = " + employeeOfMonthName);
 
         // Название электронной книги
-        String electronicBookTitle = "Джава эффективное программирование";
-        System.out.println("Название электронной книги = " + electronicBookTitle);
+        String ebookTitle = "Джава эффективное программирование";
+        System.out.println("Название электронной книги = " + ebookTitle);
 
         // Размер
         int size = 48;

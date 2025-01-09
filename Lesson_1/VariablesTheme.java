@@ -3,20 +3,20 @@ public class VariablesTheme {
     public static void main(String[] args) {
         System.out.println("1. Вывод характеристик компьютера\n");
         byte numberOfCores = 4;
-        short cpu = 2200;
+        short cpuFrequency = 2200;
         int ramSize = 16;
         long storageSize = 500000000000L;
         float screenSize = 15.4f;
         double price = 35000.99;
-        char processorBrand = 'I';
+        char cpuBrand = 'I';
         boolean isLaptop = true;
         System.out.println("Количество ядер процессора: " + numberOfCores);
-        System.out.println("Частота процессора: " + cpu + " МГц");
+        System.out.println("Частота процессора: " + cpuFrequency + " МГц");
         System.out.println("Объем оперативной памяти: " + ramSize + " Гб");
         System.out.println("Объем хранилища " + storageSize + "байт");
         System.out.println("Размер экрана: " + screenSize + " дюймов");
         System.out.println("Цена ноутбука в рублях: " + price);
-        System.out.println("Бренд процессора: " + processorBrand);
+        System.out.println("Бренд процессора: " + cpuBrand);
         System.out.println("Является ли устройство ноутбуком: " + isLaptop + "\n");
         
         System.out.println("2. Расчет стоимости товара со скидкой\n");
@@ -77,9 +77,9 @@ public class VariablesTheme {
 
         // С помощью арифметических операций
         System.out.println("С помощью арифметических операций");
-        num1 = num1 + num2;
+        num1 += num2;
         num2 = num1 - num2;
-        num1 = num1 - num2;
+        num1 -= num2;
         System.out.println("Новые значения: num1 = " + num1 + ", num2 = " + num2 + "\n");
 
         // С помощью побитовой операции ^

@@ -40,7 +40,7 @@ public class IfElseStatementTheme {
         if (num1 > num2) {
             System.out.println("Число " + num1 + " больше числа " + num2);
         } else if (num1 < num2) {
-            System.out.println("Число " + num1 + " больше числа " + num2);
+            System.out.println("Число " + num1 + " меньше числа " + num2);
         } else {
             System.out.println("Числа " + num1 + " и " + num2 + " равны");
         }

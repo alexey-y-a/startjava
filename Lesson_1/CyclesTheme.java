@@ -38,7 +38,7 @@ public class CyclesTheme {
         if (num3 > max) {
             max = num3;
         }
-        for (int i = max; i > min; i--) {
+        for (int i = max - 1; i > min; i--) {
             System.out.print(i + " ");
         }
         System.out.println();
@@ -198,15 +198,15 @@ public class CyclesTheme {
 
         System.out.println("    ТАБЛИЦА    ПИФАГОРА\n");
         System.out.print("   |");
-        for (int k = 2; k <= 9; k++) {
-            System.out.printf("%3d", k);
+        for (int i = 2; i <= 9; i++) {
+            System.out.printf("%3d", i);
         }
         System.out.println();
         System.out.println("----------------------------");
-        for (int k = 2; k <= 9; k++) {
-            System.out.printf("%2d |", k);
+        for (int i = 2; i <= 9; i++) {
+            System.out.printf("%2d |", i);
             for (int j = 2; j <= 9; j++) {
-                System.out.printf("%3d", k * j);
+                System.out.printf("%3d", i * j);
             }
             System.out.println();
         }

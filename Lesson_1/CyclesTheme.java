@@ -79,6 +79,7 @@ public class CyclesTheme {
         System.out.println("\n5. Проверка количества двоек числа на четность/нечетность\n");
 
         int num5 = 3242592;
+        int oroginalNum = num5;
         int twosNumber = 0;
         while (num5 > 0) {
             int digit = num5 % 10;
@@ -93,7 +94,7 @@ public class CyclesTheme {
         } else {
             twosEvenessStatus = "нечетное";
         }
-        System.out.println("В " + num5 + " " + twosEvenessStatus + 
+        System.out.println("В " + oroginalNum + " " + twosEvenessStatus + 
                 " (" + twosNumber + ") количество двоек");
 
         System.out.println("\n6. Вывод геометрических фигур\n");

@@ -1,5 +1,3 @@
-package ru.topjava.lesson1;
-
 import java.util.Random;
 
 public class RpsGameFormatting {
@@ -7,30 +5,26 @@ public class RpsGameFormatting {
     // Игра Камень-Ножницы-Бумага
     public static void main(String[] args) throws InterruptedException {
         String rock = "R";
-        String scissors= "S";
-        String paper = "P" ;
-
+        String scissors = "S";
+        String paper = "P";
 
         // Ход первого игрока
-        String firstPlayerName  = "HEL";
+        String firstPlayerName = "HEL";
         Random random = new Random();
         int firstPlayerChoice = random.nextInt(1, 100);
         String firstPlayerSign = rock;
-
-
         if (firstPlayerChoice > 66) {
             firstPlayerSign = paper;
-        }
-        else if (firstPlayerChoice > 33) {
+        } else if (firstPlayerChoice > 33) {
             firstPlayerSign = scissors;
         }
-        System.out.println("Ход "+ firstPlayerName + ": ");
+        System.out.println("Ход " + firstPlayerName + ": ");
         for (int i = 0; i < 5; i++) {
-            System.out.print (rock + "\r") ;
+            System.out.print(rock + "\r");
             Thread.sleep(100);
-            System.out.print (scissors + "\r" );
+            System.out.print(scissors + "\r");
             Thread.sleep(100);
-            System.out.print (paper + "\r");
+            System.out.print(paper + "\r");
             Thread.sleep(100);
         }
         System.out.println(firstPlayerSign);
@@ -39,20 +33,18 @@ public class RpsGameFormatting {
         String secondPlayerName = "WALLE";
         int secondPlayerChoice = random.nextInt(1, 100);
         String secondPlayerSign = rock;
-
-
         if (secondPlayerChoice > 66) {
             secondPlayerSign = paper;
         } else if (secondPlayerChoice > 33) {
             secondPlayerSign = scissors;
         }
-        System.out.println("Ход " + secondPlayerName +": ");
-        for (int i = 0; i < 5; i ++) {
+        System.out.println("Ход " + secondPlayerName + ": ");
+        for (int i = 0; i < 5; i++) {
             System.out.print(rock + "\r");
             Thread.sleep(100);
-            System.out.print(scissors + "\r" );
+            System.out.print(scissors + "\r");
             Thread.sleep(100);
-            System.out.print (paper + "\r");
+            System.out.print(paper + "\r");
             Thread.sleep(100);
         }
         System.out.println(secondPlayerSign);

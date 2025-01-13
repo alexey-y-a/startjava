@@ -42,7 +42,7 @@ public class CyclesTheme {
             System.out.print(i + " ");
         }
 
-        System.out.println("\n3. Вывод реверсивного числа и суммы его цифр\n");
+        System.out.println("\n\n3. Вывод реверсивного числа и суммы его цифр\n");
 
         int num4 = 1234;
         int sum = 0;
@@ -76,22 +76,19 @@ public class CyclesTheme {
             }
         }
 
-        System.out.println("\n5. Проверка количества двоек числа на четность/нечетность\n");
+        System.out.println("\n\n5. Проверка количества двоек числа на четность/нечетность\n");
 
         int num5 = 3242592;
         int oroginalNum = num5;
         int twosNumber = 0;
         while (num5 > 0) {
-            int digit = num5 % 10;
-            if (digit == 2) {
+            if (num5 % 10 == 2) {
                 twosNumber++;
             }
             num5 /= 10;
         }
-        String twosEvenessStatus;
-        if (twosNumber % 2 == 0) {
-            twosEvenessStatus = "четное";
-        } else {
+        String twosEvenessStatus = "четное";
+        if (twosNumber % 2 != 0) {
             twosEvenessStatus = "нечетное";
         }
         System.out.println("В " + oroginalNum + " " + twosEvenessStatus + 
@@ -120,24 +117,23 @@ public class CyclesTheme {
 
         int height = 3;
         currRow = 1;
+        boolean isIncreasing = true;
         do {
             int dollar = 1;
-            while (dollar <= currRow) {
+            do {
                 System.out.print("$");
                 dollar++;
-            } 
+            } while (dollar <= currRow);
             System.out.println();
-            currRow++;
-        } while (currRow <= height);
-        currRow = height - 1;
-        do {
-            int dollar = 1;
-            while (dollar <= currRow) {
-                System.out.print("$");
-                dollar++;
+            if (isIncreasing) {
+                currRow++;
+                if (currRow > height) {
+                    isIncreasing = false;
+                    currRow = height - 1;
+                }
+            } else {
+                currRow--;
             }
-            System.out.println();
-            currRow--;
         } while (currRow >= 1);
 
         System.out.println("\n7. Вывод ASCII-символов\n");
@@ -177,25 +173,19 @@ public class CyclesTheme {
         int secondHalf = num8 % 1000;
         int firstHalfSum = 0;
         int secondHalfSum = 0;
-        int tempFirst = firstHalf;
-        int tempSecond = secondHalf;
-        while (tempFirst > 0 || tempSecond > 0) {
-            if (tempFirst > 0) {
-                firstHalfSum += tempFirst % 10;
-                tempFirst /= 10;
-            }
-            if (tempSecond > 0) {
-                secondHalfSum += tempSecond % 10;
-                tempSecond /= 10;
-            }
+        while (secondHalf > 0) {
+            firstHalfSum += firstHalf % 10;
+            secondHalfSum += secondHalf % 10;
+            firstHalf /= 10;
+            secondHalf /= 10;
         }
         if (firstHalfSum == secondHalfSum) {
             System.out.println("Число " + num8 + " - счастливое");
         } else {
             System.out.println("Число " + num8 + " - несчастливое");
         }
-        System.out.println("Сумма цифр " + firstHalf + " = " + firstHalfSum);
-        System.out.println("Сумма " + secondHalf + " = " + secondHalfSum);
+        System.out.println("Сумма цифр " + (num8 / 1000) + " = " + firstHalfSum);
+        System.out.println("Сумма " + (num8 % 1000) + " = " + secondHalfSum);
 
         System.out.println("\n10. Вывод таблицы умножения Пифагора\n");
 

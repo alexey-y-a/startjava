@@ -10,10 +10,10 @@ public class MyFirstGame {
             if (i == secretNumber) {
                 System.out.println("Вы победили!");
                 break;
-            } else if (i < secretNumber) {
-                System.out.println(i + " меньше того, что загадал компьютер");
-            } else {
+            }
+            if (i > secretNumber) {
                 System.out.println(i + " ,больше того, что загадал компьютер");
+                continue;
             }
         }
     }

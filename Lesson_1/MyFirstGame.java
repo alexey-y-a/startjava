@@ -1,4 +1,4 @@
-public class MyFirstGame {
+ public class MyFirstGame {
     
     public static void main(String[] args) {
         System.out.println("\nИгра Угадай число\n");

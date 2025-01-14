@@ -6,11 +6,6 @@ public class Calculator {
         int num1 = 2;
         int num2 = 10;
         char operator = '^';
-        if (operator != '+' && operator != '-' && operator != '*' && 
-                operator != '/' && operator != '^' && operator != '%') {
-            System.out.println("Ошибка: неподдерживаемая операция");
-            return;
-        }
         if ((operator == '/' || operator == '%') && num2 == 0) {
             System.out.println("Ошибка: деление на ноль");
             return;
@@ -28,7 +23,10 @@ public class Calculator {
                 }
             }
             case '%' -> result = num1 % num2;
-            default -> System.out.println("Ошибка: неподдерживаемая операция");
+            default -> {
+                System.out.println("Ошибка: неподдерживаемая операция");
+                return;
+            }
         }
         System.out.println(num1 + " " + operator + " " + num2 + " = " + result);
     }

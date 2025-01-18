@@ -5,19 +5,18 @@ public class CalculatorTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Введите первое число: ");
+            System.out.print("Введите выражение (например, 2 + 3): ");
             int num1 = scanner.nextInt();
-            System.out.println("Введите знак операции (+, -, *, /, ^, %): ");
             char operator = scanner.next().charAt(0);
-            System.out.println("Введите второе число: ");
             int num2 = scanner.nextInt();
-            String result = Calculator.calculate(num1, num2, operator);
-            System.out.println(result);
-            String response;
-            do {
-                System.out.println("Хотите продолжить вычисления? [yes/no]:");
-                response = scanner.next().toLowerCase();
-            } while (!response.equals("yes") && !response.equals("no"));
+            int result = Calculator.calculate(num1, operator, num2);
+            if (result == Integer.MIN_VALUE) {
+                System.out.println("Ошибка: некорректная операция или деление на ноль");
+            } else {
+                System.out.println(num1 + " " + operator + " " + num2 + " = " + result);
+            }
+            System.out.print("Хотите продолжить вычисления? [yes/no]: ");
+            String response = scanner.next().toLowerCase();
             if (response.equals("no")) {
                 break;
             }

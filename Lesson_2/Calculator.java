@@ -1,6 +1,6 @@
 public class Calculator {
 
-    public static String calculate(int num1, int num2, char operator) {
+    public static int calculate(int num1, char operator, int num2) {
         int result = 0;
         switch (operator) {
             case '+' -> result = num1 + num2;
@@ -8,33 +8,30 @@ public class Calculator {
             case '*' -> result = num1 * num2;
             case '/' -> {
                 if (num2 == 0) {
-                    return "Ошибка: деление на ноль запрещено";
+                    return Integer.MIN_VALUE;
                 }
                 result = num1 / num2;
             }
             case '^' -> {
                 result = 1;
+                int power = Math.abs(num2);
+                for (int i = 0; i < power; i++) {
+                    result *= num1;
+                }
                 if (num2 < 0) {
-                    for (int i = 0; i < -num2; i++) {
-                        result *= num1;
-                    }
                     result = 1 / result;
-                } else {
-                    for (int i = 0; i < num2; i++) {
-                        result *= num1;
-                    }
                 }
             }
             case '%' -> {
                 if (num2 == 0) {
-                    return "Ошибка: деление на ноль запрещено";
+                    return Integer.MIN_VALUE;
                 }
                 result = num1 % num2;
             }
             default -> {
-                return "Ошибка: операция '" + operator + "'не поддерживается";
+                return Integer.MIN_VALUE;
             }
         }
-        return num1 + " " + operator + " " + num2 + " = " + result;
+        return result;
     }
 }

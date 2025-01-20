@@ -8,9 +8,12 @@ public class Jaeger {
     private int speed;
     private int strength;
     private int armor;
+    
+    public Jaeger() {
+    }
 
-    public Jaeger(String modelName, String mark, String origin, float height, float weight,
-            int speed, int strength, int armor) {
+    public Jaeger(String modelName, String mark, String origin, float height, 
+            float weight, int speed, int strength, int armor) {
         this.modelName = modelName;
         this.mark = mark;
         this.origin = origin;
@@ -85,6 +88,20 @@ public class Jaeger {
         this.armor = armor;
     }
 
+    @Override
+    public String toString() {
+        return "Jaeger{" +
+                "modelName='" + modelName + '\'' +
+                ", mark='" + mark + '\'' +
+                ", origin='" + origin + '\'' +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", speed=" + speed +
+                ", strength=" + strength +
+                ", armor=" + armor +
+                '}';
+    }
+
     public void move() {
         System.out.println(modelName + " движется со скоростью " + speed);
     }
@@ -93,14 +110,7 @@ public class Jaeger {
         System.out.println(modelName + " сила атаки " + strength);
     }
 
-    public void info() {
-        System.out.println("Название модели " + modelName);
-        System.out.println("Название серии " + mark);
-        System.out.println("Страна изготовитель " + origin);
-        System.out.println("Высота " + height);
-        System.out.println("Вес " + weight);
-        System.out.println("Скорость " + speed);
-        System.out.println("Сила " + strength);
-        System.out.println("Броня " + armor);
+    public boolean isOperational() {
+        return armor > 0;
     }
 }

@@ -1,7 +1,7 @@
 public class JaegerTest {
     
     public static void main(String[] args) {
-        Jaeger gipsyDanger = new Jaeger(null, null, null, 0, 0, 0, 0, 0);
+        Jaeger gipsyDanger = new Jaeger();
         gipsyDanger.setModelName("Gipsy Danger");
         gipsyDanger.setMark("Mark-3");
         gipsyDanger.setOrigin("United States of America");
@@ -12,15 +12,15 @@ public class JaegerTest {
         gipsyDanger.setArmor(6);
 
         System.out.println("Gipsy Danger:");
-        gipsyDanger.info();
+        System.out.println(gipsyDanger);
         gipsyDanger.move();
         gipsyDanger.attack();
 
-        Jaeger strikerEureka = new Jaeger("Striker Eureka", "Mark-5", "Australia", 
-                76.2f, 6650f, 10, 10, 9);
+        Jaeger strikerEureka = new Jaeger("Striker Eureka", "Mark-5", "Australia", 76.2f, 
+                6650f, 10, 10, 9);
 
         System.out.println("\nStriker Eureka:");
-        strikerEureka.info();
+        System.out.println(strikerEureka);
         strikerEureka.move();
         strikerEureka.attack();
     }

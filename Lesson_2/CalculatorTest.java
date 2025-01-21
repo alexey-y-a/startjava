@@ -6,36 +6,56 @@ public class CalculatorTest {
         Scanner scanner = new Scanner(System.in);
         String response;
         do {
-            int num1;
-            System.out.println("Введите первое число:");
-            while (!scanner.hasNextInt()) {
-                System.out.print("Ошибка: введите целое число");
-                System.out.print("Введите первое число: ");
-                scanner.next();
-            }
-            num1 = scanner.nextInt();
-            System.out.println("Введите знак операции (+, -, *, /, ^, %): ");
-            char operator = scanner.next().charAt(0);
-            System.out.print("Введите второе число: ");
-            while (!scanner.hasNextInt()) {
-                System.out.println("Ошибка: введите целое число");
-                System.out.print("Введите второе число: ");
-                scanner.next();
-            }
-            int num2 = scanner.nextInt();
+            int num1 = getValidNumber("Введите первое число: ", scanner);
+            char operator = getValidOperator("Введите знак операции (+, -, *, /, ^, %): ", scanner);
+            int num2 = getValidNumber("Введите второе число", scanner);
             int result = Calculator.calculate(num1, operator, num2);
-            if (result != Integer.MIN_VALUE) {
-                System.out.println(num1 + " " + operator + " " + num2 + " = " + result);
-            } 
-            do {
-                System.out.print("Хотите продолжить вычисления? [yes/no]: ");
-                response = scanner.next().toLowerCase();
-                if (!response.equals("yes") && !response.equals("no")) {
-                    System.out.println("Ошибка: введите 'yes' или 'no'");
-                }
-            } while (!response.equals("yes") && !response.equals("no"));
+            printResult(num1, operator, num2, result);
+            response = getResponse("Хотите продолжить вычисления? [yes/no]: ", scanner);
         } while (response.equals("yes"));
         System.out.println("Программа завершена");
         scanner.close();
+    }
+
+    private static int getValidNumber(String message, Scanner scanner) {
+        System.out.println(message);
+        while (!scanner.hasNextInt()) {
+            System.out.println("Ошибка: введите целое число");
+            System.out.print(message);
+            scanner.next();
+        }
+        return scanner.nextInt();
+    }
+
+    private static char getValidOperator(String message, Scanner scanner) {
+        while (true) {
+            System.out.print(message);
+            String input = scanner.next();
+            if (input.length() == 1) {
+                char operator = input.charAt(0);
+                if ("+-*/^%".indexOf(operator) != -1) {
+                    return operator;
+                }
+            }
+            System.out.println("Ошибка: введите корректный оператор (+, -, *, /, ^, %)");
+        }
+    }
+
+    private static String getResponse(String message, Scanner scanner) {
+        String response;
+        do {
+            System.out.print(message);
+            response = scanner.next().toLowerCase();
+            if (!response.equals("yes") && !response.equals("no")) {
+                System.out.println("Ошибка: введите 'yes' или 'no'");
+            }
+        } while (!response.equals("yes") && !response.equals("no"));
+        return response;
+    }
+
+    private static void printResult(int num1, char operator, int num2, int result) {
+        if (result != Integer.MIN_VALUE) {
+            System.out.println(num1 + " " + operator + " " + num2 + " = " + result);
+        }
     }
 }

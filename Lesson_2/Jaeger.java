@@ -8,7 +8,7 @@ public class Jaeger {
     private int speed;
     private int strength;
     private int armor;
-    
+
     public Jaeger() {
     }
 
@@ -88,6 +88,18 @@ public class Jaeger {
         this.armor = armor;
     }
 
+    public void move() {
+        System.out.println(modelName + " движется со скоростью " + speed);
+    }
+
+    public void attack() {
+        System.out.println(modelName + " сила атаки " + strength);
+    }
+
+    public boolean isOperational() {
+        return armor > 0;
+    }
+
     @Override
     public String toString() {
         return "Jaeger{" +
@@ -100,17 +112,5 @@ public class Jaeger {
                 ", strength=" + strength +
                 ", armor=" + armor +
                 '}';
-    }
-
-    public void move() {
-        System.out.println(modelName + " движется со скоростью " + speed);
-    }
-
-    public void attack() {
-        System.out.println(modelName + " сила атаки " + strength);
-    }
-
-    public boolean isOperational() {
-        return armor > 0;
     }
 }

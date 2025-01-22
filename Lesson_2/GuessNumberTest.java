@@ -4,24 +4,29 @@ public class GuessNumberTest {
     
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите имя первого игрока:");
-        Player player1 = new Player(scanner.nextLine());
-        System.out.println("Введите имя второго игрока:");
-        Player player2 = new Player(scanner.nextLine());
-        boolean isGameContinued = true;
-        while (isGameContinued) {
+        String response;
+        do {
+            System.out.println("Введите имя первого игрока:");
+            Player player1 = new Player(scanner.nextLine());
+            System.out.println("Введите имя второго игрока:");
+            Player player2 = new Player(scanner.nextLine());
             GuessNumber game = new GuessNumber(player1, player2);
             game.start();
-            System.out.println("Хотите продолжить игру? [yes/no]:");
-            String answer = scanner.nextLine();
-            while (!answer.equals("yes") && !answer.equals("no")) {
-                System.out.println("Неверный ввод. Хотите продолжить игру? [yes/no]:");
-                answer = scanner.nextLine();
-            }
-            if (answer.equals("no")) {
-                isGameContinued = false;
-            }
-        }
+            response = inputResponse("Хотите продолжить игру? [yes/no]: ", scanner);
+        } while (response.equals("yes"));
         System.out.println("Игра завершена!");
+        scanner.close();
+    }
+
+    private static String inputResponse(String message, Scanner scanner) {
+        String response;
+        do {
+            System.out.print(message);
+            response = scanner.nextLine().toLowerCase();
+            if (!response.equals("yes") && !response.equals("no")) {
+                System.out.println("Ошибка: введите 'yes' или 'no'");
+            }
+        } while (!response.equals("yes") && !response.equals("no"));
+        return response;
     }
 }

@@ -6,7 +6,7 @@ public class Calculator {
             case '+' -> result = num1 + num2;
             case '-' -> result = num1 - num2;
             case '*' -> result = num1 * num2;
-            case '/', '%' -> result = isDivisionZero(num1, operator, num2);
+            case '/', '%' -> result = division(num1, operator, num2);
             case '^' -> {
                 result = 1;
                 int power = Math.abs(num2);
@@ -25,7 +25,7 @@ public class Calculator {
         return result;
     }
 
-    private static int isDivisionZero(int num1, char operator, int num2) {
+    private static int division(int num1, char operator, int num2) {
         if (num2 == 0) {
             System.out.println("Ошибка: деление на ноль");
             return Integer.MIN_VALUE;

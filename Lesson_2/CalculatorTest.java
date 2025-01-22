@@ -6,18 +6,18 @@ public class CalculatorTest {
         Scanner scanner = new Scanner(System.in);
         String response;
         do {
-            int num1 = getValidNumber("Введите первое число: ", scanner);
-            char operator = getValidOperator("Введите знак операции (+, -, *, /, ^, %): ", scanner);
-            int num2 = getValidNumber("Введите второе число", scanner);
+            int num1 = inputNumber("Введите первое число: ", scanner);
+            char operator = inputOperator("Введите знак операции (+, -, *, /, ^, %): ", scanner);
+            int num2 = inputNumber("Введите второе число", scanner);
             int result = Calculator.calculate(num1, operator, num2);
             printResult(num1, operator, num2, result);
-            response = getResponse("Хотите продолжить вычисления? [yes/no]: ", scanner);
+            response = inputResponse("Хотите продолжить вычисления? [yes/no]: ", scanner);
         } while (response.equals("yes"));
         System.out.println("Программа завершена");
         scanner.close();
     }
 
-    private static int getValidNumber(String message, Scanner scanner) {
+    private static int inputNumber(String message, Scanner scanner) {
         System.out.println(message);
         while (!scanner.hasNextInt()) {
             System.out.println("Ошибка: введите целое число");
@@ -27,7 +27,7 @@ public class CalculatorTest {
         return scanner.nextInt();
     }
 
-    private static char getValidOperator(String message, Scanner scanner) {
+    private static char inputOperator(String message, Scanner scanner) {
         while (true) {
             System.out.print(message);
             String input = scanner.next();
@@ -41,7 +41,7 @@ public class CalculatorTest {
         }
     }
 
-    private static String getResponse(String message, Scanner scanner) {
+    private static String inputResponse(String message, Scanner scanner) {
         String response;
         do {
             System.out.print(message);

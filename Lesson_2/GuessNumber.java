@@ -23,19 +23,19 @@ public class GuessNumber {
     }
 
     private boolean makeGuess(Player player, Scanner scanner) {
-        int number = inputNumber(player.getName() + ", введите число: ", scanner);
+        int number = inputNumber(player.getName(), scanner);
         player.setNumber(number);
         return checkNumber(player);
     }
 
-    private int inputNumber(String message, Scanner scanner) {
+    private int inputNumber(String playerName, Scanner scanner) {
         while (true) {
-            System.out.print(message);
+            System.out.print(playerName + ", введите число: ");
             if (scanner.hasNextInt()) {
                 return scanner.nextInt();
             } else {
                 System.out.println("Ошибка: введите целое число!");
-                scanner.next(); // Очищаем некорректный ввод
+                scanner.next();
             }
         }
     }

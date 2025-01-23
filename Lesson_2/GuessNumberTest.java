@@ -12,16 +12,16 @@ public class GuessNumberTest {
             Player player2 = new Player(scanner.nextLine());
             GuessNumber game = new GuessNumber(player1, player2);
             game.start();
-            response = inputResponse("Хотите продолжить игру? [yes/no]: ", scanner);
+            response = inputResponse(scanner);
         } while (response.equals("yes"));
         System.out.println("Игра завершена!");
         scanner.close();
     }
 
-    private static String inputResponse(String message, Scanner scanner) {
+    private static String inputResponse(Scanner scanner) {
         String response;
         do {
-            System.out.print(message);
+            System.out.print("Хотите продолжить игру? [yes/no]: ");
             response = scanner.nextLine().toLowerCase();
             if (!response.equals("yes") && !response.equals("no")) {
                 System.out.println("Ошибка: введите 'yes' или 'no'");

@@ -1,3 +1,5 @@
+package com.startjava.lesson_1.final;
+
 import java.util.Random;
 
 public class RpsGameFormatting {

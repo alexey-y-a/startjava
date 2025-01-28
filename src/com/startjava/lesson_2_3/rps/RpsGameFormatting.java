@@ -1,67 +1,81 @@
 package com.startjava.lesson_2_3.rps;
 
 import java.util.Random;
+import java.util.Scanner;
 
+// Игра Камень-Ножницы-Бумага
 public class RpsGameFormatting {
 
-    // Игра Камень-Ножницы-Бумага
+    private static final String ROCK = "R";
+    private static final String SCISSORS = "S";
+    private static final String PAPER = "P";
+
     public static void main(String[] args) throws InterruptedException {
-        String rock = "R";
-        String scissors = "S";
-        String paper = "P";
+        Random random = new Random();
+        Scanner console = new Scanner(System.in);
+        String name1 = inputName(console);
+        String name2 = inputName(console);
 
         // Ход первого игрока
-        String firstPlayerName = "HEL";
-        Random random = new Random();
-        int firstPlayerChoice = random.nextInt(1, 100);
-        String firstPlayerSign = rock;
-        if (firstPlayerChoice > 66) {
-            firstPlayerSign = paper;
-        } else if (firstPlayerChoice > 33) {
-            firstPlayerSign = scissors;
-        }
-        System.out.println("Ход " + firstPlayerName + ": ");
-        for (int i = 0; i < 5; i++) {
-            System.out.print(rock + "\r");
-            Thread.sleep(100);
-            System.out.print(scissors + "\r");
-            Thread.sleep(100);
-            System.out.print(paper + "\r");
-            Thread.sleep(100);
-        }
-        System.out.println(firstPlayerSign);
+        int position = generatePosition(name1, random);
+        String sign1 = determineSign(position);
+        showSigns(sign1);
 
         // Ход второго игрока
-        String secondPlayerName = "WALLE";
-        int secondPlayerChoice = random.nextInt(1, 100);
-        String secondPlayerSign = rock;
-        if (secondPlayerChoice > 66) {
-            secondPlayerSign = paper;
-        } else if (secondPlayerChoice > 33) {
-            secondPlayerSign = scissors;
+        position = generatePosition(name2, random);
+        String sign2 = determineSign(position);
+        showSigns(sign2);
+
+        determineWinner(name1, sign1, name2, sign2);
+
+        console.close();
+    }
+
+    private static String inputName(Scanner console) {
+        System.out.print("Введите имя игрока: ");
+        return console.nextLine();
+    }
+
+    private static int generatePosition(String name, Random random) {
+        System.out.println("Ход " + name + ": ");
+        return random.nextInt(100) + 1;
+    }
+
+    private static String determineSign(int position) {
+        if (position > 66) {
+            return ROCK;
+        } else if (position > 33) {
+            return SCISSORS;
+        } else {
+            return PAPER;
         }
-        System.out.println("Ход " + secondPlayerName + ": ");
+    }
+
+    private static void showSigns(String sign) throws InterruptedException {
         for (int i = 0; i < 5; i++) {
-            System.out.print(rock + "\r");
+            System.out.print(ROCK + "\r");
             Thread.sleep(100);
-            System.out.print(scissors + "\r");
+            System.out.print(SCISSORS + "\r");
             Thread.sleep(100);
-            System.out.print(paper + "\r");
+            System.out.print(PAPER + "\r");
             Thread.sleep(100);
         }
-        System.out.println(secondPlayerSign);
-        if (firstPlayerSign.equals(secondPlayerSign)) {
-            System.out.println("Победила дружба!");
+        System.out.println(sign);
+    }
+
+    private static void determineWinner(String name1, String sign1, String name2, String sign2) {
+        if (sign1.equals(sign2)) {
+            System.out.println("\nПобедила дружба!");
             return;
         }
-        boolean isFirstPlayerWinner = (firstPlayerSign.equals(rock) && 
-                secondPlayerSign.equals(scissors) || firstPlayerSign.equals(scissors) && 
-                secondPlayerSign.equals(paper) || firstPlayerSign.equals(paper) && 
-                secondPlayerSign.equals(rock));
-        if (isFirstPlayerWinner) {
-            System.out.println("\nПобедил - " + firstPlayerName);
+
+        boolean isWinner1 = sign1.equals(ROCK) && sign2.equals(SCISSORS) ||
+                sign1.equals(SCISSORS) && sign2.equals(PAPER) ||
+                sign1.equals(PAPER) && sign2.equals(ROCK);
+        if (isWinner1) {
+            System.out.println("\nПобедил - " + name1);
         } else {
-            System.out.println("\nПобедил - " + secondPlayerName);
+            System.out.println("\nПобедил - " + name2);
         }
     }
 }

@@ -42,13 +42,9 @@ public class RpsGameFormatting {
     }
 
     private static String determineSign(int position) {
-        if (position > 66) {
-            return ROCK;
-        } else if (position > 33) {
-            return SCISSORS;
-        } else {
-            return PAPER;
-        }
+        if (position > 66) return ROCK;
+        if (position > 33) return SCISSORS;
+        return PAPER;
     }
 
     private static void showSigns(String sign) throws InterruptedException {

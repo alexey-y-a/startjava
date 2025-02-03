@@ -4,29 +4,34 @@ public class Factorial {
 
     public static void main(String[] args) {
         int[] emptyArray = new int[0];
-        calculateFactorials(emptyArray);
+        long[] resultsEmpty = calculateFactorials(emptyArray);
+        printFactorials(emptyArray, resultsEmpty);
 
         int[] nullArray = null;
-        calculateFactorials(nullArray);
+        long[] resultsNull = calculateFactorials(nullArray);
+        printFactorials(nullArray, resultsNull);
 
         int[] positiveNumbers = {8, 0, 9};
-        calculateFactorials(positiveNumbers);
+        long[] resultsPositive = calculateFactorials(positiveNumbers);
+        printFactorials(positiveNumbers, resultsPositive);
 
         int[] mixedNumbers = {-3, 1, 7, 13};
-        calculateFactorials(mixedNumbers);
+        long[] resultsMixed = calculateFactorials(mixedNumbers);
+        printFactorials(mixedNumbers, resultsMixed);
 
         int[] negativeNumbers = {-22, -0};
-        calculateFactorials(negativeNumbers);
+        long[] resultsNegative = calculateFactorials(negativeNumbers);
+        printFactorials(negativeNumbers, resultsNegative);
     }
 
-    private static void calculateFactorials(int... numbers) {
+    private static long[] calculateFactorials(int... numbers) {
         if (numbers == null) {
             System.out.println("Массив является null.");
-            return;
+            return null;
         }
         if (numbers.length == 0) {
             System.out.println("Массив пустой.");
-            return;
+            return new long[0];
         }
 
         long[] results = new long[numbers.length];
@@ -39,7 +44,7 @@ public class Factorial {
                 results[i] = calculateFactorial(number);
             }
         }
-        printResults(numbers, results);
+        return results;
     }
 
     private static long calculateFactorial(int number) {
@@ -53,11 +58,16 @@ public class Factorial {
         return factorial;
     }
 
-    private static void printResults(int[] numbers, long[] results) {
+    private static void printFactorials(int[] numbers, long[] results) {
+        if (numbers == null || results == null) {
+            return;
+        }
+        if (numbers.length == 0) {
+            return;
+        }
         for (int i = 0; i < numbers.length; i++) {
             int number = numbers[i];
             long result = results[i];
-
             if (result == -1) {
                 continue;
             }

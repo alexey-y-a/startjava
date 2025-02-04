@@ -4,27 +4,27 @@ public class Factorial {
 
     public static void main(String[] args) {
         int[] emptyArray = new int[0];
-        long[] resultsEmpty = calculateFactorials(emptyArray);
-        printFactorials(emptyArray, resultsEmpty);
+        long[] resultsEmpty = calculate(emptyArray);
+        printMathExpressions(emptyArray, resultsEmpty);
 
         int[] nullArray = null;
-        long[] resultsNull = calculateFactorials(nullArray);
-        printFactorials(nullArray, resultsNull);
+        long[] resultsNull = calculate(nullArray);
+        printMathExpressions(nullArray, resultsNull);
 
         int[] positiveNumbers = {8, 0, 9};
-        long[] resultsPositive = calculateFactorials(positiveNumbers);
-        printFactorials(positiveNumbers, resultsPositive);
+        long[] resultsPositive = calculate(positiveNumbers);
+        printMathExpressions(positiveNumbers, resultsPositive);
 
         int[] mixedNumbers = {-3, 1, 7, 13};
-        long[] resultsMixed = calculateFactorials(mixedNumbers);
-        printFactorials(mixedNumbers, resultsMixed);
+        long[] resultsMixed = calculate(mixedNumbers);
+        printMathExpressions(mixedNumbers, resultsMixed);
 
         int[] negativeNumbers = {-22, -0};
-        long[] resultsNegative = calculateFactorials(negativeNumbers);
-        printFactorials(negativeNumbers, resultsNegative);
+        long[] resultsNegative = calculate(negativeNumbers);
+        printMathExpressions(negativeNumbers, resultsNegative);
     }
 
-    private static long[] calculateFactorials(int... numbers) {
+    private static long[] calculate(int... numbers) {
         if (numbers == null) {
             System.out.println("Массив является null.");
             return null;
@@ -34,17 +34,16 @@ public class Factorial {
             return new long[0];
         }
 
-        long[] results = new long[numbers.length];
+        long[] factorials = new long[numbers.length];
         for (int i = 0; i < numbers.length; i++) {
             int number = numbers[i];
             if (number < 0) {
                 System.out.println("Ошибка: факториал " + number + "! не определен.");
-                results[i] = -1;
-            } else {
-                results[i] = calculateFactorial(number);
+                continue;
             }
+            factorials[i] = calculateFactorial(number);
         }
-        return results;
+        return factorials;
     }
 
     private static long calculateFactorial(int number) {
@@ -58,8 +57,8 @@ public class Factorial {
         return factorial;
     }
 
-    private static void printFactorials(int[] numbers, long[] results) {
-        if (numbers == null || results == null) {
+    private static void printMathExpressions(int[] numbers, long[] factorials) {
+        if (numbers == null || factorials == null) {
             return;
         }
         if (numbers.length == 0) {
@@ -67,14 +66,14 @@ public class Factorial {
         }
         for (int i = 0; i < numbers.length; i++) {
             int number = numbers[i];
-            long result = results[i];
-            if (result == -1) {
+            if (number < 0) {
                 continue;
             }
+            long factorial = factorials[i];
 
             System.out.print(number + "! = ");
-            System.out.print((number == 0) ? "1" : buildFactorialExpression(number));
-            System.out.println(" = " + result);
+            System.out.print((number == 0 || number == 1) ? "1" : buildFactorialExpression(number));
+            System.out.println(" = " + factorial);
         }
     }
 

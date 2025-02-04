@@ -6,20 +6,24 @@ public class Reverser {
 
     public static void main(String[] args) {
         int[] emptyArray = new int[0];
+        printArray("До реверса", emptyArray);
         reverseArray(emptyArray);
-        printArray(emptyArray);
+        printArray("После реверса", emptyArray);
 
         int[] nullArray = null;
+        printArray("До реверса", nullArray);
         reverseArray(nullArray);
-        printArray(nullArray);
+        printArray("После реверса", nullArray);
 
         int[] array1 = {6, 8, 9, 1};
+        printArray("До реверса", array1);
         reverseArray(array1);
-        printArray(array1);
+        printArray("После реверса", array1);
 
         int[] array2 = {13, 8, 5, 3, 2, 1, 1};
+        printArray("До реверса", array2);
         reverseArray(array2);
-        printArray(array2);
+        printArray("После реверса", array2);
     }
 
     private static void reverseArray(int[] array) {
@@ -27,20 +31,21 @@ public class Reverser {
             return;
         }
         int length = array.length;
-        for (int i = 0; i < length / 2; i++) {
+        for (int i = 0; i < length; i++) {
             int tmp = array[i];
-            array[i] = array[length - 1 - i];
-            array[length - 1 - i] = tmp;
+            array[i] = array[length - 1];
+            array[length - 1] = tmp;
+            length--;
         }
     }
 
-    private static void printArray(int[] array) {
+    private static void printArray(String message, int[] array) {
         if (array == null) {
-            System.out.println("Массив является null.");
+            System.out.println(message + ": Массив является null.");
         } else if (array.length == 0) {
-            System.out.println("Массив пустой");
+            System.out.println(message + ": Массив пустой");
         } else {
-            System.out.println("После реверса: " + Arrays.toString(array));
+            System.out.println(message + ": " + Arrays.toString(array));
         }
     }
 }

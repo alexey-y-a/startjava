@@ -5,23 +5,23 @@ public class Factorial {
     public static void main(String[] args) {
         int[] emptyArray = new int[0];
         long[] resultsEmpty = calculate(emptyArray);
-        printMathExpressions(emptyArray, resultsEmpty);
+        printMathExpr(emptyArray, resultsEmpty);
 
         int[] nullArray = null;
         long[] resultsNull = calculate(nullArray);
-        printMathExpressions(nullArray, resultsNull);
+        printMathExpr(nullArray, resultsNull);
 
         int[] positiveNumbers = {8, 0, 9};
         long[] resultsPositive = calculate(positiveNumbers);
-        printMathExpressions(positiveNumbers, resultsPositive);
+        printMathExpr(positiveNumbers, resultsPositive);
 
         int[] mixedNumbers = {-3, 1, 7, 13};
         long[] resultsMixed = calculate(mixedNumbers);
-        printMathExpressions(mixedNumbers, resultsMixed);
+        printMathExpr(mixedNumbers, resultsMixed);
 
         int[] negativeNumbers = {-22, -0};
         long[] resultsNegative = calculate(negativeNumbers);
-        printMathExpressions(negativeNumbers, resultsNegative);
+        printMathExpr(negativeNumbers, resultsNegative);
     }
 
     private static long[] calculate(int... numbers) {
@@ -57,7 +57,7 @@ public class Factorial {
         return factorial;
     }
 
-    private static void printMathExpressions(int[] numbers, long[] factorials) {
+    private static void printMathExpr(int[] numbers, long[] factorials) {
         if (numbers == null || factorials == null) {
             return;
         }
@@ -66,18 +66,19 @@ public class Factorial {
         }
         for (int i = 0; i < numbers.length; i++) {
             int number = numbers[i];
-            if (number < 0) {
-                continue;
-            }
+            if (number < 0) continue;
             long factorial = factorials[i];
-
             System.out.print(number + "! = ");
-            System.out.print((number == 0 || number == 1) ? "1" : buildFactorialExpression(number));
-            System.out.println(" = " + factorial);
+            if (number == 0 || number == 1) {
+                System.out.println("1");
+            } else {
+                System.out.print(buildFactorialExpr(number));
+                System.out.println(" = " + factorial);
+            }
         }
     }
 
-    private static String buildFactorialExpression(int number) {
+    private static String buildFactorialExpr(int number) {
         StringBuilder expression = new StringBuilder();
         for (int i = 1; i <= number; i++) {
             expression.append(i);

@@ -32,20 +32,13 @@ public class Reverser {
         }
         int length = array.length;
         for (int i = 0; i < length; i++) {
-            length--;
             int tmp = array[i];
-            array[i] = array[length];
+            array[i] = array[--length];
             array[length] = tmp;
         }
     }
 
     private static void printArray(String message, int[] array) {
-        if (array == null) {
-            System.out.println(message + ": null");
-        } else if (array.length == 0) {
-            System.out.println(message + ": []");
-        } else {
-            System.out.println(message + ": " + Arrays.toString(array));
-        }
+        System.out.println(message + ": " + Arrays.toString(array));
     }
 }

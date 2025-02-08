@@ -8,40 +8,52 @@ public class ThresholdFilter {
         ThresholdFilter filter = new ThresholdFilter();
         float[] array;
 
-        array = filter.createRandomFloatArray(15);
+        array = filter.createRandomArray(15);
         System.out.println("Исходный массив:");
         filter.printArray(array, 8);
         int count = filter.filterMoreThanElement(array, -1);
+        if (count == -1) {
+            return;
+        }
         System.out.println("Измененный массив:");
         filter.printArray(array, 7);
         filter.printResults(array, -1, count);
 
-        array = filter.createRandomFloatArray(15);
+        array = filter.createRandomArray(15);
         System.out.println("Исходный массив:");
         filter.printArray(array, 8);
         count = filter.filterMoreThanElement(array, 15);
+        if (count == -1) {
+            return;
+        }
         System.out.println("Измененный массив:");
         filter.printArray(array, 7);
         filter.printResults(array, 15, count);
 
-        array = filter.createRandomFloatArray(15);
+        array = filter.createRandomArray(15);
         System.out.println("Исходный массив:");
         filter.printArray(array, 8);
         count = filter.filterMoreThanElement(array, 0);
+        if (count == -1) {
+            return;
+        }
         System.out.println("Измененный массив:");
         filter.printArray(array, 7);
         filter.printResults(array, 0, count);
 
-        array = filter.createRandomFloatArray(15);
+        array = filter.createRandomArray(15);
         System.out.println("Исходный массив:");
         filter.printArray(array, 8);
         count = filter.filterMoreThanElement(array, 14);
+        if (count == -1) {
+            return;
+        }
         System.out.println("Измененный массив:");
         filter.printArray(array, 7);
         filter.printResults(array, 14, count);
     }
 
-    private float[] createRandomFloatArray(int size) {
+    private float[] createRandomArray(int size) {
         float[] array = new float[size];
         Random random = new Random();
         for (int i = 0; i < size; i++) {

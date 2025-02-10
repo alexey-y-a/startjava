@@ -6,51 +6,28 @@ public class ThresholdFilter {
 
     public static void main(String[] args) {
         ThresholdFilter filter = new ThresholdFilter();
-        float[] array;
+
+        float[] array = filter.createRandomArray(15);
+        filter.filterMoreThanElement(array, -1);
 
         array = filter.createRandomArray(15);
-        System.out.println("Исходный массив:");
-        filter.printArray(array, 8);
-        int count = filter.filterMoreThanElement(array, -1);
-        if (count == -1) {
-            return;
+        filter.filterMoreThanElement(array, 15);
+
+        array = filter.createRandomArray(15);
+        int count = filter.filterMoreThanElement(array, 0);
+        if (count != -1) {
+            System.out.println("После обнуления:");
+            filter.printArray(array, 7);
+            System.out.printf("Количество обнуленных ячеек = %d%n", count);
         }
-        System.out.println("Измененный массив:");
-        filter.printArray(array, 7);
-        filter.printResults(array, -1, count);
 
         array = filter.createRandomArray(15);
-        System.out.println("Исходный массив:");
-        filter.printArray(array, 8);
-        count = filter.filterMoreThanElement(array, 15);
-        if (count == -1) {
-            return;
-        }
-        System.out.println("Измененный массив:");
-        filter.printArray(array, 7);
-        filter.printResults(array, 15, count);
-
-        array = filter.createRandomArray(15);
-        System.out.println("Исходный массив:");
-        filter.printArray(array, 8);
-        count = filter.filterMoreThanElement(array, 0);
-        if (count == -1) {
-            return;
-        }
-        System.out.println("Измененный массив:");
-        filter.printArray(array, 7);
-        filter.printResults(array, 0, count);
-
-        array = filter.createRandomArray(15);
-        System.out.println("Исходный массив:");
-        filter.printArray(array, 8);
         count = filter.filterMoreThanElement(array, 14);
-        if (count == -1) {
-            return;
+        if (count != -1) {
+            System.out.println("После обнуления:");
+            filter.printArray(array, 7);
+            System.out.printf("Количество обнуленных ячеек = %d%n", count);
         }
-        System.out.println("Измененный массив:");
-        filter.printArray(array, 7);
-        filter.printResults(array, 14, count);
     }
 
     private float[] createRandomArray(int size) {
@@ -64,11 +41,16 @@ public class ThresholdFilter {
 
     private int filterMoreThanElement(float[] array, int index) {
         if (index < 0 || index >= array.length) {
-            System.out.println("Ошибка: индекс " + index + " выходит за пределы массива.");
+            System.out.printf("Ошибка: значение индекса (%d) должно быть от 0 до %d%n", index, array.length - 1);
             return -1;
         }
 
         float limit = array[index];
+
+        System.out.printf("\nЗначение из ячейки [%d]: %.3f%n", index, limit);
+        System.out.println("До обнуления:");
+        printArray(array, 8);
+
         int count = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] > limit) {
@@ -89,11 +71,5 @@ public class ThresholdFilter {
         if (array.length % numbersLine != 0) {
             System.out.println();
         }
-    }
-
-    private void printResults(float[] array, int index, int count) {
-        if (count == -1) return;
-        System.out.printf("Значение из ячейки по индексу %d: %.3f%n", index, array[index]);
-        System.out.printf("Количество обнуленных ячеек: %d%n", count);
     }
 }

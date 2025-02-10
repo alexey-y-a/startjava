@@ -6,27 +6,20 @@ public class ThresholdFilter {
 
     public static void main(String[] args) {
         ThresholdFilter filter = new ThresholdFilter();
+        int[] testIndices = {-1, 15, 0, 14};
 
-        float[] array = filter.createRandomArray(15);
-        filter.filterMoreThanElement(array, -1);
+        for (int index : testIndices) {
+            float[] array = filter.createRandomArray(15);
 
-        array = filter.createRandomArray(15);
-        filter.filterMoreThanElement(array, 15);
+            filter.printArray(array, 8, "\nДо обнуления:");
 
-        array = filter.createRandomArray(15);
-        int count = filter.filterMoreThanElement(array, 0);
-        if (count != -1) {
-            System.out.println("После обнуления:");
-            filter.printArray(array, 7);
-            System.out.printf("Количество обнуленных ячеек = %d%n", count);
-        }
+            int count = filter.filterMoreThanElement(array, index);
 
-        array = filter.createRandomArray(15);
-        count = filter.filterMoreThanElement(array, 14);
-        if (count != -1) {
-            System.out.println("После обнуления:");
-            filter.printArray(array, 7);
-            System.out.printf("Количество обнуленных ячеек = %d%n", count);
+            if (count != -1) {
+                System.out.printf("Значение из ячейки [%d]: %.3f%n", index, array[index]);
+                filter.printArray(array, 7, "После обнуления");
+                System.out.printf("Количество обнуленных ячеек = %d%n", count);
+            }
         }
     }
 
@@ -46,11 +39,6 @@ public class ThresholdFilter {
         }
 
         float limit = array[index];
-
-        System.out.printf("\nЗначение из ячейки [%d]: %.3f%n", index, limit);
-        System.out.println("До обнуления:");
-        printArray(array, 8);
-
         int count = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] > limit) {
@@ -61,7 +49,8 @@ public class ThresholdFilter {
         return count;
     }
 
-    private void printArray(float[] array, int numbersLine) {
+    private void printArray(float[] array, int numbersLine, String header) {
+        System.out.println(header);
         for (int i = 0; i < array.length; i++) {
             System.out.printf("%.3f ", array[i]);
             if ((i + 1) % numbersLine == 0) {

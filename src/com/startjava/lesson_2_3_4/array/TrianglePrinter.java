@@ -4,20 +4,9 @@ public class TrianglePrinter {
     public static void main(String[] args) {
         TrianglePrinter printer = new TrianglePrinter();
 
-        char[]sortedChars = printer.generateSortedChars('0', '9', true);
-        if (sortedChars != null) {
-            printer.printTriangle(sortedChars);
-        }
-
-        sortedChars = printer.generateSortedChars('/', '!', false);
-        if (sortedChars != null) {
-            printer.printTriangle(sortedChars);
-        }
-
-        sortedChars = printer.generateSortedChars('A', 'J', false);
-        if (sortedChars != null) {
-            printer.printTriangle(sortedChars);
-        }
+        printer.printTriangle(printer.generateSortedChars('0', '9', true));
+        printer.printTriangle(printer.generateSortedChars('/', '!', false));
+        printer.printTriangle(printer.generateSortedChars('A', 'J', false));
     }
 
     private char[] generateSortedChars(char start, char end, boolean ascending) {
@@ -34,6 +23,10 @@ public class TrianglePrinter {
     }
 
     private void printTriangle(char[] chars) {
+        if (chars == null) {
+            return;
+        }
+
         int maxWidth = chars.length * 2 - 1;
         StringBuilder triangle = new StringBuilder();
 

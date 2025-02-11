@@ -11,12 +11,17 @@ public class ThresholdFilter {
         for (int index : testIndices) {
             float[] array = filter.createRandomArray(15);
 
-            filter.printArray(array, 8, "\nДо обнуления:");
+            if (index < 0 || index >= array.length) {
+                System.out.printf("Ошибка: значение индекса (%d) должно быть от 0 до %d%n", index, array.length - 1);
+                continue;
+            }
+
+            System.out.printf("\nЗначение из ячейки [%d]: %.3f%n", index, array[index]);
+            filter.printArray(array, 8, "До обнуления:");
 
             int count = filter.filterMoreThanElement(array, index);
 
             if (count != -1) {
-                System.out.printf("Значение из ячейки [%d]: %.3f%n", index, array[index]);
                 filter.printArray(array, 7, "После обнуления");
                 System.out.printf("Количество обнуленных ячеек = %d%n", count);
             }
@@ -33,11 +38,6 @@ public class ThresholdFilter {
     }
 
     private int filterMoreThanElement(float[] array, int index) {
-        if (index < 0 || index >= array.length) {
-            System.out.printf("Ошибка: значение индекса (%d) должно быть от 0 до %d%n", index, array.length - 1);
-            return -1;
-        }
-
         float limit = array[index];
         int count = 0;
         for (int i = 0; i < array.length; i++) {

@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class UniqueNumber {
     public static void main(String[] args) {
-        UniqueNumber generator = new UniqueNumber();
+        UniqueNumber un = new UniqueNumber();
 
         int[][] testCases = {
                 {-30, -10, 23},
@@ -20,8 +20,8 @@ public class UniqueNumber {
             int numbersPerLine = testCase[2];
 
             System.out.printf("Генерация массива для границ (%d, %d):%n", leftBound, rightBound);
-            int[] result = generator.generateUniqueNumbers(leftBound, rightBound);
-            printFormattedArray(result, numbersPerLine);
+            int[] uniqueNumbers = un.generateUniqueNumbers(leftBound, rightBound);
+            printFormattedArray(uniqueNumbers, numbersPerLine);
             System.out.println();
         }
     }
@@ -41,27 +41,27 @@ public class UniqueNumber {
         }
 
         Random random = new Random();
-        int[] result = new int[arrayLength];
+        int[] uniqueNumbers = new int[arrayLength];
         int uniqueCount = 0;
 
         while (uniqueCount < arrayLength) {
-            int randomNumber = leftBound + random.nextInt(segmentLength);
+            int randomNumber = random.nextInt(leftBound, rightBound + 1);
 
             boolean isUnique = true;
             for (int i = 0; i < uniqueCount; i++) {
-                if (result[i] == randomNumber) {
+                if (uniqueNumbers[i] == randomNumber) {
                     isUnique = false;
                     break;
                 }
             }
 
             if (isUnique) {
-                result[uniqueCount++] = randomNumber;
+                uniqueNumbers[uniqueCount++] = randomNumber;
             }
         }
 
-        Arrays.sort(result);
-        return result;
+        Arrays.sort(uniqueNumbers);
+        return uniqueNumbers;
     }
 
     private static void printFormattedArray(int[] array, int numbersPerLine) {

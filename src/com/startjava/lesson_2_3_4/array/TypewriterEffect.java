@@ -1,8 +1,5 @@
 package com.startjava.lesson_2_3_4.array;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TypewriterEffect {
     public static void main(String[] args) {
         TypewriterEffect typewriter = new TypewriterEffect();
@@ -26,20 +23,18 @@ public class TypewriterEffect {
             return;
         }
 
-        List<String> words = extractWords(text);
+        String[] words = extractWords(text);
 
-        if (words.isEmpty()) {
+        if (words == null || words.length == 0) {
             System.out.println("Слова в тексте отсутствуют.");
             return;
         }
 
-        String shortestWord =
-                words.stream().min((w1, w2) -> Integer.compare(w1.length(), w2.length())).orElse("");
-        String longestWord =
-                words.stream().max((w1, w2) -> Integer.compare(w1.length(), w2.length())).orElse("");
+        String shortestWord = findShortestWord(words);
+        String longestWord = findLongestWord(words);
 
-        int startIndex = words.indexOf(shortestWord);
-        int endIndex = words.indexOf(longestWord);
+        int startIndex = indexOfWord(words, shortestWord);
+        int endIndex = indexOfWord(words, longestWord);
 
         if (startIndex > endIndex) {
             int temp = startIndex;
@@ -47,15 +42,28 @@ public class TypewriterEffect {
             endIndex = temp;
         }
 
-        System.out.print("Слова между самым коротким и самым длинным (включительно): ");
         for (int i = startIndex; i <= endIndex; i++) {
-            System.out.print(words.get(i).toUpperCase() + " ");
+            words[i] = words[i].toUpperCase();
         }
-        System.out.println("\n");
+
+        String[] parts = extractParts(text);
+        StringBuilder modifiedText = new StringBuilder();
+        int wordIndex = 0;
+        for (String part : parts) {
+            if (part.equals("\n")) {
+                modifiedText.append(part);
+            } else {
+                String[] partWords = part.split("\\s+");
+                for (String word : partWords) {
+                    modifiedText.append(words[wordIndex++]).append(" ");
+                }
+                modifiedText.setLength(modifiedText.length() - 1);
+            }
+        }
 
         System.out.println("Текст с эффектом пишущей машинки:");
         try {
-            for (char c : text.toCharArray()) {
+            for (char c : modifiedText.toString().toCharArray()) {
                 System.out.print(c);
                 Thread.sleep(50);
             }
@@ -65,23 +73,40 @@ public class TypewriterEffect {
         System.out.println();
     }
 
-    private List<String> extractWords(String text) {
-        List<String> words = new ArrayList<>();
-        StringBuilder wordBuilder = new StringBuilder();
+    private String[] extractParts(String text) {
+        return text.split("(?<=\\n)|(?=\\n)");
+    }
 
-        for (char c : text.toCharArray()) {
-            if (Character.isLetter(c)) {
-                wordBuilder.append(c);
-            } else if (wordBuilder.length() > 0) {
-                words.add(wordBuilder.toString());
-                wordBuilder.setLength(0);
+    private String[] extractWords(String text) {
+        return text.replaceAll("\\n", " ").split("\\s+");
+    }
+
+    private String findShortestWord(String[] words) {
+        String shortest = words[0];
+        for (String word : words) {
+            if (word.length() < shortest.length()) {
+                shortest = word;
             }
         }
+        return shortest;
+    }
 
-        if (wordBuilder.length() > 0) {
-            words.add(wordBuilder.toString());
+    private String findLongestWord(String[] words) {
+        String longest = words[0];
+        for (String word : words) {
+            if (word.length() > longest.length()) {
+                longest = word;
+            }
         }
+        return longest;
+    }
 
-        return words;
+    private int indexOfWord(String[] words, String target) {
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].equals(target)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

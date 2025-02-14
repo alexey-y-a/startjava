@@ -24,7 +24,6 @@ public class TypewriterEffect {
         }
 
         String[] words = extractWords(text);
-
         if (words == null || words.length == 0) {
             System.out.println("Слова в тексте отсутствуют.");
             return;
@@ -42,22 +41,19 @@ public class TypewriterEffect {
             endIndex = temp;
         }
 
-        for (int i = startIndex; i <= endIndex; i++) {
-            words[i] = words[i].toUpperCase();
-        }
-
-        String[] parts = extractParts(text);
+        String[] parts = text.split("(?<=\\s)|(?=\\s)|(?<=\\p{Punct})|(?=\\p{Punct})");
         StringBuilder modifiedText = new StringBuilder();
         int wordIndex = 0;
         for (String part : parts) {
-            if (part.equals("\n")) {
+            if (part.trim().isEmpty() || part.equals("\n") || isPunctuation(part)) {
                 modifiedText.append(part);
             } else {
-                String[] partWords = part.split("\\s+");
-                for (String word : partWords) {
-                    modifiedText.append(words[wordIndex++]).append(" ");
+                if (wordIndex >= startIndex && wordIndex <= endIndex) {
+                    modifiedText.append(part.toUpperCase());
+                } else {
+                    modifiedText.append(part);
                 }
-                modifiedText.setLength(modifiedText.length() - 1);
+                wordIndex++;
             }
         }
 
@@ -73,12 +69,8 @@ public class TypewriterEffect {
         System.out.println();
     }
 
-    private String[] extractParts(String text) {
-        return text.split("(?<=\\n)|(?=\\n)");
-    }
-
     private String[] extractWords(String text) {
-        return text.replaceAll("\\n", " ").split("\\s+");
+        return text.replaceAll("\\p{Punct}", "").split("\\s+");
     }
 
     private String findShortestWord(String[] words) {
@@ -108,5 +100,9 @@ public class TypewriterEffect {
             }
         }
         return -1;
+    }
+
+    private boolean isPunctuation(String str) {
+        return str.matches("\\p{Punct}");
     }
 }

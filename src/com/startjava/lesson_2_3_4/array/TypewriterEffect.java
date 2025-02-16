@@ -11,26 +11,26 @@ public class TypewriterEffect {
                 ""
         };
 
-        for (String text : testStrings) {
-            typewriter.printWithTypewriterEffect(text);
+        for (String originalText : testStrings) {
+            String processedText = typewriter.processText(originalText);
+            typewriter.type(processedText);
             System.out.println();
         }
     }
 
-    private void printWithTypewriterEffect(String text) {
-        if (text == null || text.isEmpty()) {
-            System.out.println("пустая строка.");
-            return;
+    private String processText(String originalText) {
+        if (originalText == null || originalText.isEmpty()) {
+            return "пустая строка.";
         }
 
-        String[] words = extractWords(text);
+        String[] words = extractWords(originalText);
         if (words == null || words.length == 0) {
-            System.out.println("Слова в тексте отсутствуют.");
-            return;
+            return "Слова в тексте отсутствуют.";
         }
 
-        String shortestWord = findShortestWord(words);
-        String longestWord = findLongestWord(words);
+        String[] shortestAndLongest = findShortestAndLongestWord(words);
+        String shortestWord = shortestAndLongest[0];
+        String longestWord = shortestAndLongest[1];
 
         int startIndex = indexOfWord(words, shortestWord);
         int endIndex = indexOfWord(words, longestWord);
@@ -41,25 +41,29 @@ public class TypewriterEffect {
             endIndex = temp;
         }
 
-        String[] parts = text.split("(?<=\\s)|(?=\\s)|(?<=\\p{Punct})|(?=\\p{Punct})");
+        String[] parts = originalText.split(
+                "(?<=\\S)(?=\\s)|(?<=\\s)(?=\\S)|(?<=\\p{Punct})(?=\\S)|(?<=\\S)(?=\\p{Punct})");
         StringBuilder modifiedText = new StringBuilder();
-        int wordIndex = 0;
+        int currentWordIndex = 0;
         for (String part : parts) {
-            if (part.trim().isEmpty() || part.equals("\n") || isPunctuation(part)) {
+            if (part.trim().isEmpty() || isPunctuation(part)) {
                 modifiedText.append(part);
             } else {
-                if (wordIndex >= startIndex && wordIndex <= endIndex) {
-                    modifiedText.append(part.toUpperCase());
+                if (currentWordIndex >= startIndex && currentWordIndex <= endIndex) {
+                    modifiedText.append(words[currentWordIndex].toUpperCase());
                 } else {
-                    modifiedText.append(part);
+                    modifiedText.append(words[currentWordIndex]);
                 }
-                wordIndex++;
+                currentWordIndex++;
             }
         }
+        return modifiedText.toString();
+    }
 
+    private void type(String text) {
         System.out.println("Текст с эффектом пишущей машинки:");
         try {
-            for (char c : modifiedText.toString().toCharArray()) {
+            for (char c : text.toCharArray()) {
                 System.out.print(c);
                 Thread.sleep(50);
             }
@@ -70,27 +74,21 @@ public class TypewriterEffect {
     }
 
     private String[] extractWords(String text) {
-        return text.replaceAll("\\p{Punct}", "").split("\\s+");
+        return text.replaceAll("[\\p{Punct}\\s]+", " ").trim().split("\\s+");
     }
 
-    private String findShortestWord(String[] words) {
+    private String[] findShortestAndLongestWord(String[] words) {
         String shortest = words[0];
+        String longest = words[0];
         for (String word : words) {
             if (word.length() < shortest.length()) {
                 shortest = word;
             }
-        }
-        return shortest;
-    }
-
-    private String findLongestWord(String[] words) {
-        String longest = words[0];
-        for (String word : words) {
             if (word.length() > longest.length()) {
                 longest = word;
             }
         }
-        return longest;
+        return new String[]{shortest, longest};
     }
 
     private int indexOfWord(String[] words, String target) {

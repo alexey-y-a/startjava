@@ -12,13 +12,13 @@ public class TypewriterEffect {
         };
 
         for (String originalText : testStrings) {
-            String processedText = typewriter.processText(originalText);
-            typewriter.type(processedText);
+            String transformedText = typewriter.transformText(originalText);
+            typewriter.type(transformedText);
             System.out.println();
         }
     }
 
-    private String processText(String originalText) {
+    private String transformText(String originalText) {
         if (originalText == null || originalText.isEmpty()) {
             return "пустая строка.";
         }

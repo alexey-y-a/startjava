@@ -1,11 +1,12 @@
 package com.startjava.lesson_2_3_4.hangman;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
 class HangmanGame {
-    private static final String[] WORDS = {"КОМПЬЮТЕР", "ТЕЛЕФОН", "ПРОГРАММА", "ИНТЕРНЕТ", "МОНИТОР"};
-    private static final String[] HANGMAN = {
+    private final String[] words = {"КОМПЬЮТЕР", "ТЕЛЕФОН", "ПРОГРАММА", "ИНТЕРНЕТ", "МОНИТОР"};
+    private final String[] gallows = {
             "_______",
             "|     |",
             "|     @",
@@ -13,23 +14,24 @@ class HangmanGame {
             "|    / \\",
             "| GAME OVER!"
     };
-    private static final int MAX_ATTEMPTS = HANGMAN.length;
+    private static final int MAX_ATTEMPTS = 6;
 
-    private String wordToGuess;
-    private char[] guessedWordMask;
-    private boolean[] hangmanState;
-    private StringBuilder wrongLetters;
+    private final String wordToGuess;
+    private final char[] guessedWordMask;
+    private final StringBuilder wrongLetters;
     private int attemptsLeft;
 
     public HangmanGame() {
-        this.wordToGuess = getRandomWord();
-        this.guessedWordMask = new char[wordToGuess.length()];
-        for (int i = 0; i < guessedWordMask.length; i++) {
-            guessedWordMask[i] = '_';
-        }
-        this.hangmanState = new boolean[HANGMAN.length];
-        this.wrongLetters = new StringBuilder();
-        this.attemptsLeft = MAX_ATTEMPTS;
+        wordToGuess = chooseGuessingWord();
+        guessedWordMask = new char[wordToGuess.length()];
+        Arrays.fill(guessedWordMask, '_');
+        wrongLetters = new StringBuilder();
+        attemptsLeft = MAX_ATTEMPTS;
+    }
+
+    private String chooseGuessingWord() {
+        Random random = new Random();
+        return words[random.nextInt(words.length)];
     }
 
     public void startGame(Scanner scanner) {
@@ -50,13 +52,8 @@ class HangmanGame {
                 System.out.println("Эта буква уже была введена ранее.");
                 continue;
             }
-
             if (wordToGuess.indexOf(letter) >= 0) {
                 updateGuessedWordMask(letter);
-                if (attemptsLeft < MAX_ATTEMPTS) {
-                    rollbackHangman();
-                    attemptsLeft++;
-                }
                 System.out.printf("Буква '%s' есть в слове!%n", letter);
             } else {
                 addWrongLetter(letter);
@@ -65,7 +62,7 @@ class HangmanGame {
             }
         }
 
-        if (new String(guessedWordMask).contains("_")) {
+        if (String.valueOf(guessedWordMask).contains("_")) {
             System.out.println("Вы проиграли! Загаданное слово было: " + wordToGuess);
         } else {
             System.out.println("Поздравляем! Вы угадали слово: " + wordToGuess);
@@ -78,13 +75,13 @@ class HangmanGame {
         System.out.println("Ошибочные буквы: " + wrongLetters);
         System.out.println("Количество попыток: " + attemptsLeft);
         System.out.println("Виселица:");
-        for (int i = 0; i < hangmanState.length; i++) {
-            System.out.println(hangmanState[i] ? HANGMAN[i] : "");
+        for (int i = 0; i < MAX_ATTEMPTS - attemptsLeft; i++) {
+            System.out.println(gallows[i]);
         }
     }
 
     private boolean isValidInput(String input) {
-        return input.length() == 1 && Character.UnicodeBlock.of(input.charAt(0)) == Character.UnicodeBlock.CYRILLIC;
+        return input.length() == 1 && input.matches("[А-Я]");
     }
 
     private boolean isLetterGuessed(char letter) {
@@ -102,21 +99,6 @@ class HangmanGame {
     private void addWrongLetter(char letter) {
         if (wrongLetters.indexOf(String.valueOf(letter)) < 0) {
             wrongLetters.append(letter).append(" ");
-            hangmanState[MAX_ATTEMPTS - attemptsLeft] = true;
         }
-    }
-
-    private void rollbackHangman() {
-        for (int i = hangmanState.length - 1; i >= 0; i--) {
-            if (hangmanState[i]) {
-                hangmanState[i] = false;
-                break;
-            }
-        }
-    }
-
-    private String getRandomWord() {
-        Random random = new Random();
-        return WORDS[random.nextInt(WORDS.length)];
     }
 }

@@ -8,15 +8,15 @@ public class HangmanGameMain {
         String continueGame = "yes";
 
         while (continueGame.equalsIgnoreCase("yes")) {
-            HangmanGame game = new HangmanGame();
-            game.startGame(scanner);
+            HangmanGame hangman = new HangmanGame();
+            hangman.startGame(scanner);
 
             System.out.println("Хотите сыграть еще раз? Введите 'yes' для продолжения или 'no' для завершения:");
-            continueGame = scanner.nextLine().trim();
-            while (!continueGame.equalsIgnoreCase("yes") &&
-                    !continueGame.equalsIgnoreCase("no")) {
+            continueGame = scanner.nextLine().trim().toLowerCase();
+
+            if (!continueGame.equals("yes") && !continueGame.equals("no")) {
                 System.out.println("Некорректный ввод. Введите 'yes' или 'no':");
-                continueGame = scanner.nextLine().trim();
+                continueGame = scanner.nextLine().trim().toLowerCase();
             }
         }
         System.out.println("Спасибо за игру! До свидания!");

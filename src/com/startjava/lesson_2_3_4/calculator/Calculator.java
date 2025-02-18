@@ -5,24 +5,37 @@ public class Calculator {
     private Calculator() {
     }
 
-    public static double calculate(int num1, char operator, int num2) {
-        try {
-            return switch (operator) {
-                case '+' -> num1 + num2;
-                case '-' -> num1 - num2;
-                case '*' -> num1 * num2;
-                case '/' -> division(num1, num2);
-                case '%' -> num1 % num2;
-                case '^' -> Math.pow(num1, num2);
-                default -> {
-                    System.out.println("Ошибка: операция '" + operator + "' не поддерживается");
-                    yield Double.NaN;
-                }
-            };
-        } catch (ArithmeticException e) {
-            System.out.println("Ошибка: " + e.getMessage());
+    public static double calculate(String expression) {
+        String[] parts = expression.split("\\s+");
+        if (parts.length != 3) {
+            System.out.println("Ошибка: выражение должно состоять из трех частей (число оператор число)");
             return Double.NaN;
         }
+
+        int num1;
+        int num2;
+        try {
+            num1 = Integer.parseInt(parts[0]);
+            num2 = Integer.parseInt(parts[2]);
+        } catch (NumberFormatException e) {
+            System.out.println("Ошибка: введите корректные числа");
+            return Double.NaN;
+        }
+
+        char operator = parts[1].charAt(0);
+
+        return switch (operator) {
+            case '+' -> num1 + num2;
+            case '-' -> num1 - num2;
+            case '*' -> num1 * num2;
+            case '/' -> division(num1, num2);
+            case '%' -> Math.floorMod(num1, num2);
+            case '^' -> Math.pow(num1, num2);
+            default -> {
+                System.out.println("Ошибка: операция '" + operator + "' не поддерживается");
+                yield Double.NaN;
+            }
+        };
     }
 
     private static double division(int num1, int num2) {

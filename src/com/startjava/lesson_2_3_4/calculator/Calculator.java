@@ -29,7 +29,7 @@ public class Calculator {
             case '-' -> num1 - num2;
             case '*' -> num1 * num2;
             case '/' -> division(num1, num2);
-            case '%' -> Math.floorMod(num1, num2);
+            case '%' -> divisionMod(num1, num2);
             case '^' -> Math.pow(num1, num2);
             default -> {
                 System.out.println("Ошибка: операция '" + operator + "' не поддерживается");
@@ -44,5 +44,13 @@ public class Calculator {
             return Double.NaN;
         }
         return (double) num1 / num2;
+    }
+
+    private static double divisionMod(int num1, int num2) {
+        if (num2 == 0) {
+            System.out.println("Ошибка: деление на ноль");
+            return Double.NaN;
+        }
+        return num1 % num2;
     }
 }

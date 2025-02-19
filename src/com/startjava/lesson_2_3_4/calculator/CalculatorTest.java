@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class CalculatorTest {
-    
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String response;
@@ -20,16 +20,14 @@ public class CalculatorTest {
     }
 
     private static String inputResponse(Scanner scanner) {
-        String response;
-        while (true) {
-            System.out.print("Хотите продолжить вычисления? [yes/no]: ");
-            response = scanner.next().toLowerCase();
-            scanner.nextLine();
-            if (response.equals("yes") || response.equals("no")) {
-                return response;
-            }
+        System.out.print("Хотите продолжить вычисления? [yes/no]: ");
+        String response = scanner.next().toLowerCase();
+        scanner.nextLine();
+        if (!response.equals("yes") && !response.equals("no")) {
             System.out.println("Введите корректный ответ [yes / no]:");
+            return inputResponse(scanner);
         }
+        return response;
     }
 
     private static void printResult(String expression, double result) {

@@ -31,9 +31,8 @@ class HangmanGame {
         return words[random.nextInt(words.length)];
     }
 
-    public void startGame(Scanner scanner) {
+    public void play(Scanner scanner) {
         System.out.println("Добро пожаловать в игру 'Виселица'!");
-
         while (attemptsLeft > 0 && guessedWordMask.indexOf("_") != -1) {
             displayGameState();
             char letter = getValidLetter(scanner);
@@ -46,7 +45,7 @@ class HangmanGame {
                 System.out.printf("Буквы '%s' нет в слове.%n", letter);
             }
         }
-        if (String.valueOf(guessedWordMask).contains("_")) {
+        if (guessedWordMask.indexOf("_") != -1) {
             System.out.println("Вы проиграли! Загаданное слово было: " + wordToGuess);
         } else {
             System.out.println("Поздравляем! Вы угадали слово: " + wordToGuess);
@@ -95,7 +94,7 @@ class HangmanGame {
 
     private void displayGameState() {
         System.out.println("\nТекущее состояние игры:");
-        System.out.println("Загаданное слово: " + new String(guessedWordMask));
+        System.out.println("Загаданное слово: " + guessedWordMask);
         System.out.println("Ошибочные буквы: " + wrongLetters);
         System.out.println("Количество попыток: " + attemptsLeft);
         System.out.println("Виселица:");

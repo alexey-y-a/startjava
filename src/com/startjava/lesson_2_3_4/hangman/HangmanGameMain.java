@@ -5,26 +5,19 @@ import java.util.Scanner;
 public class HangmanGameMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String userChoice = "yes";
+        String option = "yes";
 
-        while (userChoice.equalsIgnoreCase("yes")) {
-            HangmanGame hangman = new HangmanGame();
-            hangman.startGame(scanner);
-            userChoice = getUserInput(scanner,
-                    "Хотите сыграть еще раз? Введите 'yes' для продолжения или 'no' для завершения:");
+        while (!"no".equals(option)) {
+            if ("yes".equals(option)) {
+                new HangmanGame().play(scanner);
+                System.out.print("\nХотите продолжить игру? [yes / no]: ");
+            } else {
+                System.out.print("Введите корректный ответ [yes / no]: ");
+            }
+            option = scanner.nextLine().trim().toLowerCase();
         }
 
         System.out.println("Спасибо за игру! До свидания!");
         scanner.close();
-    }
-
-    private static String getUserInput(Scanner scanner, String prompt) {
-        System.out.println(prompt);
-        String input = scanner.nextLine().trim().toLowerCase();
-        while (!input.equals("yes") && !input.equals("no")) {
-            System.out.println("Некорректный ввод. Введите 'yes' или 'no':");
-            input = scanner.nextLine().trim().toLowerCase();
-        }
-        return input;
     }
 }

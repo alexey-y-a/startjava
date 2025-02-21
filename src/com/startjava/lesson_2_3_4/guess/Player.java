@@ -4,7 +4,10 @@ import java.util.Arrays;
 
 public class Player {
 
-    private static final int MAX_ATTEMPTS = 10;
+    public static final int MAX_ATTEMPTS = 10;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 100;
+
     private final String name;
     private final int[] numbers = new int[MAX_ATTEMPTS];
     private int attemptCount;
@@ -18,9 +21,10 @@ public class Player {
         return name;
     }
 
-    public void addNumber(int number) throws IllegalArgumentException {
-        if (number < 1 || number > 100) {
-            throw new IllegalArgumentException("Число должно входить в отрезок [1, 100]");
+    public void addNumber(int number) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+            throw new IllegalArgumentException("Число должно входить в отрезок " +
+                    "[\" + MIN_NUMBER + \", \" + MAX_NUMBER + \"]");
         }
         if (attemptCount < MAX_ATTEMPTS) {
             numbers[attemptCount++] = number;
@@ -31,12 +35,12 @@ public class Player {
         return Arrays.copyOf(numbers, attemptCount);
     }
 
-    public void clearNumbers() {
-        Arrays.fill(numbers, 0, attemptCount, 0);
-        attemptCount = 0;
-    }
-
     public int getAttemptCount() {
         return attemptCount;
+    }
+
+    public void clear() {
+        Arrays.fill(numbers, 0, attemptCount, 0);
+        attemptCount = 0;
     }
 }

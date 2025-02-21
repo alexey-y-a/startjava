@@ -1,6 +1,7 @@
 package com.startjava.lesson_2_3_4.guess;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class GuessNumber {
@@ -12,7 +13,8 @@ public class GuessNumber {
     public GuessNumber(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
-        this.secretNumber = (int) (Math.random() * Player.MAX_NUMBER) + Player.MIN_NUMBER;
+        Random random = new Random();
+        this.secretNumber = random.nextInt(Player.MIN_NUMBER, Player.MAX_NUMBER + 1);
     }
 
     public void start() {
@@ -21,26 +23,27 @@ public class GuessNumber {
 
         for (int i = 1; i <= Player.MAX_ATTEMPTS; i++) {
             System.out.println("Попытка " + i);
-            boolean player1Guessed = makeGuess(player1, scanner, i);
-            if (player1Guessed) {
+            if (makeGuess(player1, scanner)) {
                 displayResults();
                 return;
             }
-            boolean player2Guessed = makeGuess(player2, scanner, i);
-            if (player2Guessed) {
+            if (player1.getAttemptCount() == Player.MAX_ATTEMPTS) {
+                System.out.println("У " + player1.getName() + " закончились попытки!");
+            }
+            if (makeGuess(player2, scanner)) {
                 displayResults();
                 return;
             }
+            if (player2.getAttemptCount() == Player.MAX_ATTEMPTS) {
+                System.out.println("У " + player2.getName() + " закончились попытки!");
+            }
         }
-
-        if (player1.getAttemptCount() == Player.MAX_ATTEMPTS) {
-            System.out.println("У " + player1.getName() + " закончились попытки!");
-        }
-        if (player2.getAttemptCount() == Player.MAX_ATTEMPTS) {
-            System.out.println("У " + player2.getName() + " закончились попытки!");
-        }
-
         displayResults();
+    }
+
+    private boolean makeGuess(Player player, Scanner scanner) {
+        int number = inputNumber(player, scanner);
+        return checkNumber(player, number, player.getAttemptCount());
     }
 
     private int inputNumber(Player player, Scanner scanner) {
@@ -53,21 +56,13 @@ public class GuessNumber {
             } catch (NumberFormatException e) {
                 System.out.println("Ошибка: введите целое число!");
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage() + " Попробуйте еще раз:");
+                System.out.println(e.getMessage());
             }
         }
     }
 
     private boolean checkNumber(Player player, int number, int attempt) {
-        String message;
-        if (number == secretNumber) {
-            message = "равно";
-        } else if (number < secretNumber) {
-            message = "меньше";
-        } else {
-            message = "больше";
-        }
-
+        String message = number == secretNumber ? "равно" : (number < secretNumber ? "меньше" : "больше");
         System.out.println("Число " + number + " " + message + " загаданного");
 
         if (number == secretNumber) {
@@ -76,11 +71,6 @@ public class GuessNumber {
             return true;
         }
         return false;
-    }
-
-    private boolean makeGuess(Player player, Scanner scanner, int attempt) {
-        int number = inputNumber(player, scanner);
-        return checkNumber(player, number, attempt);
     }
 
     private void displayResults() {

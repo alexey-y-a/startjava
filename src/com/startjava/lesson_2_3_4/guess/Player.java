@@ -23,8 +23,8 @@ public class Player {
 
     public void addNumber(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new IllegalArgumentException("Число должно входить в отрезок " +
-                    "[\" + MIN_NUMBER + \", \" + MAX_NUMBER + \"]");
+            throw new IllegalArgumentException("Число должно входить в отрезок [" +
+                    MIN_NUMBER + ", " + MAX_NUMBER + "]. Попробуйте еще раз:");
         }
         if (attemptCount < MAX_ATTEMPTS) {
             numbers[attemptCount++] = number;

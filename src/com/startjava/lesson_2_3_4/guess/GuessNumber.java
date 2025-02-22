@@ -27,15 +27,9 @@ public class GuessNumber {
                 displayResults();
                 return;
             }
-            if (player1.getAttemptCount() == Player.MAX_ATTEMPTS) {
-                System.out.println("У " + player1.getName() + " закончились попытки!");
-            }
             if (makeGuess(player2, scanner)) {
                 displayResults();
                 return;
-            }
-            if (player2.getAttemptCount() == Player.MAX_ATTEMPTS) {
-                System.out.println("У " + player2.getName() + " закончились попытки!");
             }
         }
         displayResults();
@@ -43,7 +37,10 @@ public class GuessNumber {
 
     private boolean makeGuess(Player player, Scanner scanner) {
         int number = inputNumber(player, scanner);
-        return checkNumber(player, number, player.getAttemptCount());
+        if (player.getAttemptCount() == Player.MAX_ATTEMPTS) {
+            System.out.println("У " + player.getName() + " закончились попытки!");
+        }
+        return isGuessed(player, number, player.getAttemptCount());
     }
 
     private int inputNumber(Player player, Scanner scanner) {
@@ -61,10 +58,9 @@ public class GuessNumber {
         }
     }
 
-    private boolean checkNumber(Player player, int number, int attempt) {
-        String message = number == secretNumber ? "равно" : (number < secretNumber ? "меньше" : "больше");
+    private boolean isGuessed(Player player, int number, int attempt) {
+        String message = number < secretNumber ? "меньше" : "больше";
         System.out.println("Число " + number + " " + message + " загаданного");
-
         if (number == secretNumber) {
             System.out.println(player.getName() + " угадал число " +
                     secretNumber + " с " + attempt + "-й попытки!");

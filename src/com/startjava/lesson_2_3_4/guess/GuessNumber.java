@@ -37,10 +37,7 @@ public class GuessNumber {
 
     private boolean makeGuess(Player player, Scanner scanner) {
         int number = inputNumber(player, scanner);
-        if (player.getAttemptCount() == Player.MAX_ATTEMPTS) {
-            System.out.println("У " + player.getName() + " закончились попытки!");
-        }
-        return isGuessed(player, number, player.getAttemptCount());
+        return isGuessed(player, number);
     }
 
     private int inputNumber(Player player, Scanner scanner) {
@@ -58,21 +55,29 @@ public class GuessNumber {
         }
     }
 
-    private boolean isGuessed(Player player, int number, int attempt) {
-        String message = number < secretNumber ? "меньше" : "больше";
-        System.out.println("Число " + number + " " + message + " загаданного");
+    private boolean isGuessed(Player player, int number) {
+        int attempt = player.getAttemptCount();
         if (number == secretNumber) {
             System.out.println(player.getName() + " угадал число " +
                     secretNumber + " с " + attempt + "-й попытки!");
             return true;
         }
+        String message = number < secretNumber ? "меньше" : "больше";
+        System.out.println("Число " + number + " " + message + " загаданного");
+        if (attempt == Player.MAX_ATTEMPTS) {
+            System.out.println("У " + player.getName() + " закончились попытки!");
+        }
         return false;
     }
 
     private void displayResults() {
-        System.out.println("Числа игрока " + player1.getName() + ": " + Arrays.toString(player1.getNumbers()));
-        System.out.println("Числа игрока " + player2.getName() + ": " + Arrays.toString(player2.getNumbers()));
+        displayPlayerResults(player1);
+        displayPlayerResults(player2);
         player1.clear();
         player2.clear();
+    }
+
+    private void displayPlayerResults(Player player) {
+        System.out.println("Числа игрока " + player.getName() + ": " + Arrays.toString(player.getNumbers()));
     }
 }

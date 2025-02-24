@@ -1,5 +1,7 @@
 package com.startjava.graduation.bookshelf;
 
+import java.util.Arrays;
+
 public class Bookshelf {
     private static final int MAX_BOOKS = 10;
     private final Book[] books = new Book[MAX_BOOKS];
@@ -34,14 +36,12 @@ public class Bookshelf {
     }
 
     public void clear() {
-        for (int i = 0; i < bookCount; i++) {
-            books[i] = null;
-        }
+        Arrays.fill(books, 0, bookCount, null);
         bookCount = 0;
     }
 
     public Book[] getAllBooks() {
-        return java.util.Arrays.copyOf(books, bookCount);
+        return Arrays.copyOf(books, bookCount);
     }
 
     public int getBookCount() {
@@ -52,23 +52,24 @@ public class Bookshelf {
         return MAX_BOOKS - bookCount;
     }
 
-    public void display() {
+    public String display() {
         if (bookCount == 0) {
-            System.out.println("Шкаф пуст. Вы можете добавить в него первую книгу.");
-            return;
+            return "Шкаф пуст. Вы можете добавить в него первую книгу.";
         }
 
-        System.out.printf("В шкафу книг - %d, свободно полок - %d%n", bookCount, getFreeShelves());
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("В шкафу книг - %d, свободно полок - %d%n", bookCount, getFreeShelves()));
         String separator = "|--------------------------------------------|";
 
         for (int i = 0; i < MAX_BOOKS; i++) {
-            System.out.println(separator);
+            result.append(separator).append("\n");
             if (i < bookCount) {
-                System.out.printf("| %-40s |%n", books[i]);
+                result.append(String.format("| %-40s |%n", books[i]));
             } else {
                 System.out.printf("| %-40s |%n", "");
             }
         }
-        System.out.println(separator);
+        result.append(separator).append("\n");
+        return result.toString();
     }
 }

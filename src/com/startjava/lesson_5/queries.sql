@@ -22,8 +22,7 @@ SELECT *
 -- Вывод самого старого робота
 SELECT *
   FROM jaegers
- ORDER BY launch ASC
- LIMIT 1;
+ WHERE launch = (SELECT MIN(launch) FROM jaegers);
 
 -- Вывод роботов, которые уничтожили больше всех Kaiju
 SELECT model_name, mark, launch, kaiju_kill
